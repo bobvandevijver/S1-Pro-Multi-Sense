@@ -93,9 +93,6 @@ esphome:
           if (!isnan(id(bme688_temp_offset).state)) {
             id(bsec_virtual_sensor)->set_temperature_offset((float) id(bme688_temp_offset).state);
           }
-          if (!isnan(id(scd40_temp_offset).state)) {
-            id(scd40_sensor)->set_temperature_offset((float) id(scd40_temp_offset).state);
-          }
 
 script:
   - id: finish_onboarding
