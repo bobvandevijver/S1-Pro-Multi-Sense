@@ -4,7 +4,7 @@ esphome:
   name_add_mac_suffix: true
   project:
     name: "Sensy-One.S1 Pro Multi Sense"
-    version: "v1.2.13"  
+    version: "v1.2.15"  
 
   on_boot:
   - priority: 600
@@ -18,6 +18,23 @@ esphome:
                 effect: "Purple Breathing"
           else:
             - lambda: '/* NaN */'
+
+  - priority: -10
+    then:
+      - delay: 2s
+      - if:
+          condition:
+            lambda: 'return id(ble_proxy_enabled);'
+          then:
+            - lambda: |-
+                 id(bt_proxy).set_active(true);
+            - esp32_ble_tracker.start_scan:
+                id: ble_tracker
+          else:
+            - esp32_ble_tracker.stop_scan:
+                id: ble_tracker
+            - lambda: |-
+                 id(bt_proxy).set_active(false);
 
   - priority: 800
     then:
@@ -140,6 +157,17 @@ esp32:
 # esp32_improv:
 #   authorizer: none
 
+esp32_ble_tracker:
+  id: ble_tracker
+  scan_parameters:
+    interval: 320ms
+    window: 300ms
+    active: true
+
+bluetooth_proxy:
+  id: bt_proxy
+  active: false
+
 improv_serial:
 
 wifi:
@@ -151,7 +179,7 @@ captive_portal:
 
 logger:
   level: NONE
-  baud_rate: 115200
+  baud_rate: 11520
 
 api:
   reboot_timeout: 0s
@@ -224,6 +252,16 @@ globals:
     initial_value: 'false'
 
   - id: radar_single_mode
+    type: bool
+    restore_value: true
+    initial_value: 'false'
+
+  - id: env_publish_live
+    type: bool
+    restore_value: true
+    initial_value: 'true'
+
+  - id: ble_proxy_enabled
     type: bool
     restore_value: true
     initial_value: 'false'
@@ -312,6 +350,45 @@ button:
       - button.press: restart_btn
 
 switch:
+
+  - platform: template
+    id: env_publish_live_switch
+    name: "MODE | Realtime"
+    icon: mdi:speedometer
+    entity_category: config
+    restore_mode: RESTORE_DEFAULT_ON
+    lambda: |-
+      return id(env_publish_live);
+    turn_on_action:
+      - lambda: |-
+          id(env_publish_live) = true;
+    turn_off_action:
+      - lambda: |-
+          id(env_publish_live) = false;
+
+  - platform: template
+    id: ble_proxy_switch
+    name: "BLE | Proxy"
+    icon: mdi:bluetooth
+    entity_category: config
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_OFF
+
+    turn_on_action:
+      - lambda: |-
+          id(ble_proxy_enabled) = true;
+          id(bt_proxy).set_active(true);
+      - esp32_ble_tracker.start_scan:
+          id: ble_tracker
+
+    turn_off_action:
+      - lambda: |-
+          id(ble_proxy_enabled) = false;
+      - esp32_ble_tracker.stop_scan:
+          id: ble_tracker
+      - lambda: |-
+          id(bt_proxy).set_active(false);
+
   - platform: template
     id: flip_y
     internal: true
@@ -692,13 +769,17 @@ sensor:
       id: scd_co2
       icon: "mdi:molecule-co2"
       filters:
-        - exponential_moving_average:
-             alpha: 0.03
-             send_every: 2
-        - or:
-           - throttle_average: 300s
-           - delta: 20
-        - debounce: 1s 
+        - lambda: |-
+            if (id(env_publish_live)) {
+              return x;
+            }
+            static uint32_t last_publish = 0;
+            const uint32_t now = millis();
+            if (last_publish == 0 || (uint32_t)(now - last_publish) >= 60000) {
+              last_publish = now;
+              return x;
+            }
+            return {};
       device_class: carbon_dioxide
       unit_of_measurement: "ppm"
       accuracy_decimals: 0
@@ -709,61 +790,81 @@ sensor:
       unit_of_measurement: "°C"
       icon: "mdi:thermometer"
       filters:
-        - exponential_moving_average:
-           alpha: 0.03
-           send_every: 2
-        - or:
-           - throttle_average: 300s
-           - delta: 0.1
-        - debounce: 1s 
+        - lambda: |-
+            if (id(env_publish_live)) {
+              return x;
+            }
+            static uint32_t last_publish = 0;
+            const uint32_t now = millis();
+            if (last_publish == 0 || (uint32_t)(now - last_publish) >= 60000) {
+              last_publish = now;
+              return x;
+            }
+            return {};
     humidity:
       name: "SCD40 Humidity"
       id: scd40_rh
       unit_of_measurement: "%"
       icon: "mdi:water-percent"
       filters:
-        - exponential_moving_average:
-           alpha: 0.03
-           send_every: 2
-        - or:
-           - throttle_average: 300s
-           - delta: 0.5
-        - debounce: 1s
+        - lambda: |-
+            if (id(env_publish_live)) {
+              return x;
+            }
+            static uint32_t last_publish = 0;
+            const uint32_t now = millis();
+            if (last_publish == 0 || (uint32_t)(now - last_publish) >= 60000) {
+              last_publish = now;
+              return x;
+            }
+            return {};
 
   - platform: bme68x_bsec2
     temperature:
       name: "BME688 Temperature"
       id: bme_temp
       filters:
-        - exponential_moving_average:
-           alpha: 0.03
-           send_every: 2
-        - or:
-           - throttle_average: 300s
-           - delta: 0.1
-        - debounce: 1s
+        - lambda: |-
+            if (id(env_publish_live)) {
+              return x;
+            }
+            static uint32_t last_publish = 0;
+            const uint32_t now = millis();
+            if (last_publish == 0 || (uint32_t)(now - last_publish) >= 60000) {
+              last_publish = now;
+              return x;
+            }
+            return {};
     pressure:
       name: "BME688 Pressure"
       id: bme_pressure
       filters:
-        - exponential_moving_average:
-           alpha: 0.03
-           send_every: 2
-        - or:
-           - throttle_average: 600s
-           - delta: 10
-        - debounce: 1s
+        - lambda: |-
+            if (id(env_publish_live)) {
+              return x;
+            }
+            static uint32_t last_publish = 0;
+            const uint32_t now = millis();
+            if (last_publish == 0 || (uint32_t)(now - last_publish) >= 60000) {
+              last_publish = now;
+              return x;
+            }
+            return {};
     humidity:
       name: "BME688 Humidity"
       id: bme_rh
       filters:
-        - exponential_moving_average:
-           alpha: 0.03
-           send_every: 2
-        - or:
-           - throttle_average: 300s
-           - delta: 0.5
-        - debounce: 1s
+        - lambda: |-
+            if (id(env_publish_live)) {
+              return x;
+            }
+            static uint32_t last_publish = 0;
+            const uint32_t now = millis();
+            if (last_publish == 0 || (uint32_t)(now - last_publish) >= 60000) {
+              last_publish = now;
+              return x;
+            }
+            return {};
     gas_resistance:
       name: "BME688 Gas Resistance (kΩ)"
       id: bme_gas_resistance_kohm
@@ -772,18 +873,32 @@ sensor:
       icon: mdi:omega
       filters:
         - multiply: 0.001
-        - throttle_average: 600s
+        - lambda: |-
+            if (id(env_publish_live)) {
+              return x;
+            }
+            static uint32_t last_publish = 0;
+            const uint32_t now = millis();
+            if (last_publish == 0 || (uint32_t)(now - last_publish) >= 60000) {
+              last_publish = now;
+              return x;
+            }
+            return {};
     iaq:
       name: "BME688 IAQ"
       id: bme_iaq
       filters:
-        - exponential_moving_average:
-           alpha: 0.03
-           send_every: 2
-        - or:
-           - throttle_average: 300s
-           - delta: 5
-        - debounce: 1s  
+        - lambda: |-
+            if (id(env_publish_live)) {
+              return x;
+            }
+            static uint32_t last_publish = 0;
+            const uint32_t now = millis();
+            if (last_publish == 0 || (uint32_t)(now - last_publish) >= 60000) {
+              last_publish = now;
+              return x;
+            }
+            return {};
     co2_equivalent:
       name: "BME688 CO₂ Equivalent"
       id: bme_co2_eq
@@ -791,9 +906,33 @@ sensor:
       unit_of_measurement: "ppm"
       accuracy_decimals: 0
       state_class: measurement
+      filters:
+        - lambda: |-
+            if (id(env_publish_live)) {
+              return x;
+            }
+            static uint32_t last_publish = 0;
+            const uint32_t now = millis();
+            if (last_publish == 0 || (uint32_t)(now - last_publish) >= 60000) {
+              last_publish = now;
+              return x;
+            }
+            return {};
     breath_voc_equivalent:
       name: "BME688 VOC Equivalent"
       id: bme_voc_eq
+      filters:
+        - lambda: |-
+            if (id(env_publish_live)) {
+              return x;
+            }
+            static uint32_t last_publish = 0;
+            const uint32_t now = millis();
+            if (last_publish == 0 || (uint32_t)(now - last_publish) >= 60000) {
+              last_publish = now;
+              return x;
+            }
+            return {};
 
   - platform: ltr390
     i2c_id: i2c_bus
@@ -809,13 +948,17 @@ sensor:
               return x;
             }
             return x + id(ltr390_lux_offset).state;
-        - exponential_moving_average:
-           alpha: 0.03
-           send_every: 2
-        - or:
-           - throttle_average: 300s
-           - delta: 0.1
-        - debounce: 1s
+        - lambda: |-
+            if (id(env_publish_live)) {
+              return x;
+            }
+            static uint32_t last_publish = 0;
+            const uint32_t now = millis();
+            if (last_publish == 0 || (uint32_t)(now - last_publish) >= 60000) {
+              last_publish = now;
+              return x;
+            }
+            return {};
 
     uv_index:
       name: "LTR390 UV Index"
@@ -827,13 +970,17 @@ sensor:
               return x;
             }
             return x + id(ltr390_uv_offset).state;
-        - exponential_moving_average:
-           alpha: 0.03
-           send_every: 2
-        - or:
-           - throttle_average: 300s
-           - delta: 0.01
-        - debounce: 1s
+        - lambda: |-
+            if (id(env_publish_live)) {
+              return x;
+            }
+            static uint32_t last_publish = 0;
+            const uint32_t now = millis();
+            if (last_publish == 0 || (uint32_t)(now - last_publish) >= 60000) {
+              last_publish = now;
+              return x;
+            }
+            return {};
 
     gain:
       ambient_light: X1
@@ -1486,7 +1633,6 @@ number:
     optimistic: true
     restore_value: true
     mode: box
-
   - platform: template
     id: zone2_p5_y
     name: "Zone 2 P5 Y"
@@ -1512,7 +1658,6 @@ number:
     optimistic: true
     restore_value: true
     mode: box
-
   - platform: template
     id: zone2_p6_y
     name: "Zone 2 P6 Y"
@@ -1538,7 +1683,6 @@ number:
     optimistic: true
     restore_value: true
     mode: box
-
   - platform: template
     id: zone2_p7_y
     name: "Zone 2 P7 Y"
@@ -1564,7 +1708,6 @@ number:
     optimistic: true
     restore_value: true
     mode: box
-
   - platform: template
     id: zone2_p8_y
     name: "Zone 2 P8 Y"
@@ -1629,7 +1772,6 @@ number:
     optimistic: true
     restore_value: true
     mode: box
-
   - platform: template
     id: zone3_p1_y
     name: "Zone 3 P1 Y"
@@ -1655,7 +1797,6 @@ number:
     optimistic: true
     restore_value: true
     mode: box
-
   - platform: template
     id: zone3_p2_y
     name: "Zone 3 P2 Y"
@@ -1756,7 +1897,6 @@ number:
     optimistic: true
     restore_value: true
     mode: box
-
   - platform: template
     id: zone3_p6_y
     name: "Zone 3 P6 Y"
@@ -2286,6 +2426,7 @@ binary_sensor:
       return mov;
 
 text_sensor:
+
   - platform: wifi_info
     ip_address:
       id: esp32_ip_address
