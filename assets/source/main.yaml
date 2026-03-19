@@ -4,7 +4,7 @@ esphome:
   name_add_mac_suffix: true
   project:
     name: "Sensy-One.S1 Pro Multi Sense"
-    version: "v1.2.15"  
+    version: "v1.2.16"  
 
   on_boot:
   - priority: 600
@@ -30,6 +30,7 @@ esphome:
                  id(bt_proxy).set_active(true);
             - esp32_ble_tracker.start_scan:
                 id: ble_tracker
+                continuous: true
           else:
             - esp32_ble_tracker.stop_scan:
                 id: ble_tracker
@@ -380,6 +381,7 @@ switch:
           id(bt_proxy).set_active(true);
       - esp32_ble_tracker.start_scan:
           id: ble_tracker
+          continuous: true
 
     turn_off_action:
       - lambda: |-
