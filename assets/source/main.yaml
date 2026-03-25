@@ -19,24 +19,6 @@ esphome:
           else:
             - lambda: '/* NaN */'
 
-  - priority: -10
-    then:
-      - delay: 2s
-      - if:
-          condition:
-            lambda: 'return id(ble_proxy_enabled);'
-          then:
-            - lambda: |-
-                 id(bt_proxy).set_active(true);
-            - esp32_ble_tracker.start_scan:
-                id: ble_tracker
-                continuous: true
-          else:
-            - esp32_ble_tracker.stop_scan:
-                id: ble_tracker
-            - lambda: |-
-                 id(bt_proxy).set_active(false);
-
   - priority: 800
     then:
       - if:
