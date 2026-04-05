@@ -4,7 +4,7 @@ esphome:
   name_add_mac_suffix: true
   project:
     name: "Sensy-One.S1 Pro Multi Sense"
-    version: "v1.2.16"  
+    version: "v1.2.17"  
 
   on_boot:
   - priority: 600
@@ -1031,7 +1031,7 @@ number:
     id: detection_range
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 600
     optimistic: true
@@ -1056,8 +1056,8 @@ number:
     name: "Exclusion Zone P1 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1070,7 +1070,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1082,8 +1082,8 @@ number:
     name: "Exclusion Zone P2 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1096,7 +1096,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1108,8 +1108,8 @@ number:
     name: "Exclusion Zone P3 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1122,7 +1122,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1134,8 +1134,8 @@ number:
     name: "Exclusion Zone P4 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1148,7 +1148,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1160,8 +1160,8 @@ number:
     name: "Exclusion Zone P5 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1174,7 +1174,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1186,8 +1186,8 @@ number:
     name: "Exclusion Zone P6 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1200,7 +1200,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1212,8 +1212,8 @@ number:
     name: "Exclusion Zone P7 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1226,7 +1226,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1238,8 +1238,8 @@ number:
     name: "Exclusion Zone P8 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1252,7 +1252,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1277,8 +1277,8 @@ number:
     name: "Zone 1 P1 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1291,7 +1291,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1303,8 +1303,8 @@ number:
     name: "Zone 1 P2 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1317,7 +1317,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1329,8 +1329,8 @@ number:
     name: "Zone 1 P3 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1343,7 +1343,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1355,8 +1355,8 @@ number:
     name: "Zone 1 P4 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1369,7 +1369,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1381,8 +1381,8 @@ number:
     name: "Zone 1 P5 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1395,7 +1395,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1407,8 +1407,8 @@ number:
     name: "Zone 1 P6 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1421,7 +1421,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1433,8 +1433,8 @@ number:
     name: "Zone 1 P7 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1447,7 +1447,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1459,8 +1459,8 @@ number:
     name: "Zone 1 P8 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1473,7 +1473,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1524,8 +1524,8 @@ number:
     name: "Zone 2 P1 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1538,7 +1538,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1550,8 +1550,8 @@ number:
     name: "Zone 2 P2 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1564,7 +1564,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1576,8 +1576,8 @@ number:
     name: "Zone 2 P3 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1590,7 +1590,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1602,8 +1602,8 @@ number:
     name: "Zone 2 P4 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1616,7 +1616,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1628,8 +1628,8 @@ number:
     name: "Zone 2 P5 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1641,7 +1641,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1653,8 +1653,8 @@ number:
     name: "Zone 2 P6 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1666,7 +1666,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1678,8 +1678,8 @@ number:
     name: "Zone 2 P7 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1691,7 +1691,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1703,8 +1703,8 @@ number:
     name: "Zone 2 P8 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1716,7 +1716,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1767,8 +1767,8 @@ number:
     name: "Zone 3 P1 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1780,7 +1780,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1792,8 +1792,8 @@ number:
     name: "Zone 3 P2 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1805,7 +1805,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1817,8 +1817,8 @@ number:
     name: "Zone 3 P3 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1830,7 +1830,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1842,8 +1842,8 @@ number:
     name: "Zone 3 P4 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1855,7 +1855,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1867,8 +1867,8 @@ number:
     name: "Zone 3 P5 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1880,7 +1880,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1892,8 +1892,8 @@ number:
     name: "Zone 3 P6 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1905,7 +1905,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1917,8 +1917,8 @@ number:
     name: "Zone 3 P7 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1931,7 +1931,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1943,8 +1943,8 @@ number:
     name: "Zone 3 P8 X"
     icon: mdi:map-marker
     unit_of_measurement: "cm"
-    min_value: -600
-    max_value: 600
+    min_value: -1800
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
@@ -1956,7 +1956,7 @@ number:
     icon: mdi:map-marker
     unit_of_measurement: "cm"
     min_value: 0
-    max_value: 600
+    max_value: 1800
     step: 1
     initial_value: 0
     optimistic: true
