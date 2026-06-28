@@ -4,7 +4,7 @@ esphome:
   name_add_mac_suffix: true
   project:
     name: "Sensy-One.S1 Pro Multi Sense"
-    version: "v1.2.19"  
+    version: "v1.2.21"  
 
   on_boot:
   - priority: 600
@@ -134,8 +134,8 @@ esp32:
 
 # The BLE software stack on the ESP32 consumes a significant amount of RAM on the device.
 
-# esp32_improv:
-#   authorizer: none
+esp32_improv:
+   authorizer: none
 
 esp32_ble_tracker:
   id: ble_tracker
